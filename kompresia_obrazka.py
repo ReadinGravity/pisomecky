@@ -1,21 +1,24 @@
 def spracuj_riadok(riadok):
-    riadok=riadok[:-1]
-    vysledok=""
-    count=0
-    coun=0
-    for char in riadok:
-        if char=="0":
-            count+=1
+    riadok = riadok[:-1]
+    vysledok = ""
+    counter = 0
+    char = '0'
 
-        if char=="1":
-            coun+=1
-    return vysledok+str(count)+" "
+    for i in range(len(riadok)):
+        if riadok[i] == char:
+            counter += 1
+        else:
+            vysledok += str(counter) + ' '
+            counter = 1 if riadok[i] == '1' else 0
+            char = riadok[i]
+
+    vysledok += str(counter) + ' '
+    return vysledok
 
 with open("kompresia_obrazka_1.txt", 'r', encoding="UTF-8") as citanie, open("kompresia_obrazka_vystup.txt", 'w', encoding="UTF-8") as pisanie:
-    rozmery=citanie.readline()
-    obrazok=citanie.readlines()
+    rozmery = citanie.readline()
+    obrazok = citanie.readlines()
 
     pisanie.write(rozmery)
     for line in obrazok:
-        pisanie.write(spracuj_riadok(line)+'\n')
-
+        pisanie.write(spracuj_riadok(line) + '\n')
